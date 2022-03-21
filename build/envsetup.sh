@@ -402,7 +402,7 @@ function makerecipe() {
 }
 
 function mka() {
-    m -j "$@"
+    m "$@"
 }
 
 function cmka() {
