@@ -310,6 +310,9 @@
 
     <!-- circle to search -->
     <string name="config_defaultContextualSearchPackageName" translatable="false">com.google.android.googlequicksearchbox</string>
+    <string name="config_defaultContextualSearchEnabled">omni.enable_cs_helper</string>
+    <string name="config_defaultContextualSearchKey">omni.entry_point</string>
+    <string name="config_defaultContextualSearchLegacyEnabled">omni.enable_vis</string>
 
     <!-- If AOD can show an ambient version of the wallpaper -->
     <bool name="config_dozeSupportsAodWallpaper">true</bool>
