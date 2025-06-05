@@ -23,7 +23,8 @@ PRODUCT_PACKAGES += \
     LMOFreeform \
     LMOFreeformSidebar \
     NetworkLocation \
-    AppCompatConfig
+    AppCompatConfig \
+    CertifiedKeyboxOverlay
 
 ifeq ($(VOLTAGE_BUILD_TYPE),OFFICIAL)
     PRODUCT_PACKAGES += \
