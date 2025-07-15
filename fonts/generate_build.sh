@@ -84,9 +84,5 @@ prebuilt_font {
 done
 
 echo '
-# Register new fonts
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml \
-
 # Include extra addon fonts
 -include vendor/voltage/fonts/extra/extra.mk' >> font_files.mk

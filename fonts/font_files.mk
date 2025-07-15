@@ -52,9 +52,5 @@ PRODUCT_PACKAGES += \
     FluidSans-MediumItalic.ttf \
     FluidSans-Regular.ttf
 
-# Register new fonts
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml
-
 # Include extra addon fonts
 -include vendor/voltage/fonts/extra/extra.mk

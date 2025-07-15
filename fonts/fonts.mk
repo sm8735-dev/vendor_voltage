@@ -19,8 +19,8 @@ include vendor/voltage/fonts/font_files.mk
 -include vendor/voltage/fonts/extra/extra.mk
 
 # Register custom fonts
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml
+PRODUCT_PACKAGES += \
+    fonts_customization.xml
 
 # Overlays for UI font styles
 PRODUCT_PACKAGES += \
