@@ -266,6 +266,9 @@ include vendor/voltage/config/version.mk
 # BootAnimation
 include vendor/voltage/config/bootanimation.mk
 
+# boost framework
+include vendor/voltage/config/boost.mk
+
 # Fonts
 $(call inherit-product, vendor/voltage/fonts/fonts.mk)
 
