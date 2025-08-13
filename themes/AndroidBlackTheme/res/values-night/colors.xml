@@ -44,6 +44,9 @@
     <color name="system_neutral2_900">#080808</color>
     <color name="system_neutral2_1000">#000000</color>
 
+    <color name="system_accent2_800">#191919</color>
+    <color name="system_accent3_800">#191919</color>
+
     <color name="system_accent1_1000">#ff000000</color>
     <color name="system_accent2_1000">#ff000000</color>
     <color name="system_accent3_1000">#ff000000</color>
