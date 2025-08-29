@@ -19,5 +19,4 @@ PRODUCT_SYSTEM_PROPERTIES += \
     persist.sys.voltage_cpu_display=$(VOLTAGE_CPU_DISPLAY)
 
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.surface_flinger.uclamp.min=165
-
+    ro.surface_flinger.uclamp.min=100
