@@ -1,0 +1,22 @@
+//
+// SPDX-FileCopyrightText: Voltage Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+prebuilt_media {
+    name: "bootanimation.zip",
+    src: select(soong_config_variable("voltage_bootanimation", "resolution"), {
+        "1280": "1280.zip",
+        "1920": "1920.zip", 
+        "2560": "2560.zip",
+        default: "1920.zip",
+    }),
+    product_specific: true,
+}
+
+install_symlink {
+    name: "bootanimation-dark.zip",
+    product_specific: true,
+    installed_location: "media/bootanimation-dark.zip",
+    symlink_target: "bootanimation.zip",
+}

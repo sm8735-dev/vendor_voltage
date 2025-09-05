@@ -267,8 +267,10 @@ PRODUCT_COPY_FILES += \
 # Versioning
 include vendor/voltage/config/version.mk
 
-# BootAnimation
-include vendor/voltage/config/bootanimation.mk
+# Bootanimation
+PRODUCT_PACKAGES += \
+    bootanimation.zip \
+    bootanimation-dark.zip
 
 # boost framework
 include vendor/voltage/config/boost.mk

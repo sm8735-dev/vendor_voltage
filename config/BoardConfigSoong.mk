@@ -18,6 +18,9 @@ EXPORT_TO_SOONG := \
 $(call add_soong_config_namespace,voltageVarsPlugin)
 $(foreach v,$(EXPORT_TO_SOONG),$(eval $(call add_soong_config_var,voltageVarsPlugin,$(v))))
 
+# Bootanimation configuration
+$(call soong_config_set,voltage_bootanimation,resolution,$(TARGET_BOOT_ANIMATION_RES))
+
 SOONG_CONFIG_NAMESPACES += voltageGlobalVars
 SOONG_CONFIG_voltageGlobalVars += \
     camera_needs_client_info_lib \
