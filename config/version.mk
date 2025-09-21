@@ -24,17 +24,18 @@ VOLTAGE_DATE_MINUTE := $(shell date -u +%M)
 VOLTAGE_BUILD_DATE := $(VOLTAGE_DATE_YEAR)$(VOLTAGE_DATE_MONTH)$(VOLTAGE_DATE_DAY)-$(VOLTAGE_DATE_HOUR)$(VOLTAGE_DATE_MINUTE)
 TARGET_PRODUCT_SHORT := $(subst voltage_,,$(VOLTAGE_BUILD))
 
-# OFFICIAL_DEVICES
 ifeq ($(VOLTAGE_BUILD_TYPE), OFFICIAL)
-  LIST = $(shell cat vendor/voltage/voltage.devices)
-    ifeq ($(filter $(VOLTAGE_BUILD), $(LIST)), $(VOLTAGE_BUILD))
-      IS_OFFICIAL=true
-      VOLTAGE_BUILD_TYPE := OFFICIAL
-    endif
-    ifneq ($(IS_OFFICIAL), true)
-      VOLTAGE_BUILD_TYPE := UNOFFICIAL
-      $(error Device is not official "$(VOLTAGE_BUILD)")
-    endif
+
+  OFFICIAL_DEVICES_LIST := $(shell /usr/bin/curl -sLk --connect-timeout 5 https://raw.githubusercontent.com/VoltageOS/vendor_voltage/16/voltage.devices)
+
+  ifeq ($(strip $(OFFICIAL_DEVICES_LIST)),)
+    $(error Failed to download the official devices list. Please check your network connection.)
+  endif
+
+  ifeq ($(filter $(VOLTAGE_BUILD), $(OFFICIAL_DEVICES_LIST)),)
+    VOLTAGE_BUILD_TYPE := UNOFFICIAL
+  endif
+
 endif
 
 VOLTAGE_VERSION := $(VOLTAGEVERSION)-$(VOLTAGE_BUILD)-$(VOLTAGE_BUILD_DATE)-$(VOLTAGE_BUILD_TYPE)
