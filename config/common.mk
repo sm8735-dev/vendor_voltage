@@ -173,17 +173,17 @@ FULL_SYSTEM_OPTIMIZE_JAVA ?= true
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.sys.pihooks_MANUFACTURER?=Google \
     persist.sys.pihooks_BRAND?=google \
-    persist.sys.pihooks_PRODUCT?=tokay_beta \
-    persist.sys.pihooks_DEVICE?=tokay \
-    persist.sys.pihooks_ID?=BP41.250725.006 \
+    persist.sys.pihooks_PRODUCT?=husky_beta \
+    persist.sys.pihooks_DEVICE?=husky \
+    persist.sys.pihooks_ID?=BP41.250822.010 \
     persist.sys.pihooks_RELEASE?=12 \
-    persist.sys.pihooks_SECURITY_PATCH?=2025-08-05 \
+    persist.sys.pihooks_SECURITY_PATCH?=2025-09-05 \
     persist.sys.pihooks_DEVICE_INITIAL_SDK_INT?=21 \
     persist.sys.pihooks_SDK_INT?=32
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PihooksGmsFp="google/tokay_beta/tokay:Baklava/BP41.250725.006/13939570:user/release-keys" \
-    PihooksGmsModel="Pixel 9"
+    PihooksGmsFp="google/husky_beta/husky:16/BP41.250822.010/14082742:user/release-keys" \
+    PihooksGmsModel="Pixel 8 Pro"
 
 # Storage manager
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
