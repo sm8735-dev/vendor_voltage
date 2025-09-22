@@ -66,3 +66,8 @@ PRODUCT_PACKAGES += \
     UdfpsIcons \
     UdfpsAnimations
 endif
+
+TORCH_STR_SUPPORTED ?= false
+
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.sys.torch_str_support=$(TORCH_STR_SUPPORTED)
