@@ -182,6 +182,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
     persist.sys.pihooks_SDK_INT?=32
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
+    BuildFingerprint=google/comet_beta/comet:16/BP41.250916.010.A1/14281945:user/release-keys \
     PihooksGmsFp="google/comet_beta/comet:16/BP41.250916.010.A1/14281945:user/release-keys" \
     PihooksGmsModel="Pixel 9 Pro Fold"
 
