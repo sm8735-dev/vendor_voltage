@@ -12,7 +12,4 @@
         <permission name="lineageos.permission.MANAGE_LIVEDISPLAY" />
         <permission name="android.permission.MANAGE_APP_LOCK" />
     </privapp-permissions>
-    <privapp-permissions package="com.android.launcher3">
-        <permission name="com.android.permission.MANAGE_PARALLEL_SPACES"/>
-    </privapp-permissions>
 </permissions>
