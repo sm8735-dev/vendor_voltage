@@ -20,24 +20,30 @@ VOLTAGE_TARGET_PACKAGE := $(PRODUCT_OUT)/voltage-$(VOLTAGE_VERSION).zip
 
 SHA256 := prebuilts/build-tools/path/$(HOST_PREBUILT_TAG)/sha256sum
 
-CL_PRP="\033[35m"
-CL_RED="\033[31m"
-CL_GRN="\033[32m"
+CL_RED="\\033[31m"
+CL_GRN="\\033[32m"
+CL_CYN="\\033[36m"
+CL_YLW="\\033[33m"
+CL_BLD="\\033[1m"
+CL_RST="\\033[0m"
 
 .PHONY: bacon
 bacon: $(DEFAULT_GOAL) $(INTERNAL_OTA_PACKAGE_TARGET)
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(VOLTAGE_TARGET_PACKAGE)
 	$(hide) $(SHA256) $(VOLTAGE_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(VOLTAGE_TARGET_PACKAGE).sha256sum
-	echo -e ${CL_BLD}${CL_RED}"===============================-Package complete-==============================="${CL_RED}
-	echo -e ${CL_BLD}${CL_GRN}"Zip: "${CL_RED} $(VOLTAGE_TARGET_PACKAGE)${CL_RST}
-	echo -e ${CL_BLD}${CL_GRN}"SHA256: "${CL_RED}" `cat $(VOLTAGE_TARGET_PACKAGE).sha256sum | awk '{print $$1}' `"${CL_RST}
-	echo -e ${CL_BLD}${CL_GRN}"Size:"${CL_RED}" `du -sh $(VOLTAGE_TARGET_PACKAGE) | awk '{print $$1}' `"${CL_RST}
-	echo -e ${CL_BLD}${CL_GRN}"TimeStamp:"${CL_RED}" `cat $(PRODUCT_OUT)/system/build.prop | grep ro.voltage.build.date | cut -d'=' -f2 | awk '{print $$1}' `"${CL_RST}
-	echo -e ${CL_BLD}${CL_GRN}"Integer Value:"${CL_RED}" `wc -c $(VOLTAGE_TARGET_PACKAGE) | awk '{print $$1}' `"${CL_RST}
-	echo -e ${CL_BLD}${CL_RED}"================================================================================"${CL_RED}
-	$(hide) if [ "$(VOLTAGE_BUILD_TYPE)" = "OFFICIAL" ]; then \
-            echo "creating json OTA..." >&2; \
-	    ./vendor/voltage/build/tools/createjson.sh $(TARGET_DEVICE) $(PRODUCT_OUT) voltage-$(VOLTAGE_VERSION).zip; \
-	else \
-	    echo "Skipping json OTA creation..." >&2; \
-	fi
+
+	$(hide) { \
+		echo -e "\n${CL_BLD}${CL_GRN}[================= ${CL_YLW}⚡ VoltageOS Build Complete ⚡${CL_GRN} =================]${CL_RST}\n"; \
+		echo -e "${CL_BLD}${CL_GRN}▶ Device      :${CL_CYN} $(TARGET_DEVICE)${CL_RST}"; \
+		echo -e "${CL_BLD}${CL_GRN}▶ Output File :${CL_CYN} $(VOLTAGE_TARGET_PACKAGE)${CL_RST}"; \
+		echo -e "${CL_BLD}${CL_GRN}▶ SHA256      :${CL_CYN} `cut -d' ' -f1 $(VOLTAGE_TARGET_PACKAGE).sha256sum`${CL_RST}"; \
+		echo -e "${CL_BLD}${CL_GRN}▶ File Size   :${CL_CYN} `du -sh $(VOLTAGE_TARGET_PACKAGE) | awk '{print $$1}'`${CL_RST}"; \
+		echo -e "${CL_BLD}${CL_GRN}▶ Build Date  :${CL_CYN} `grep ro.voltage.build.date $(PRODUCT_OUT)/system/build.prop | cut -d'=' -f2-`${CL_RST}"; \
+		if [ "$(VOLTAGE_BUILD_TYPE)" = "OFFICIAL" ]; then \
+			echo -e "${CL_BLD}${CL_GRN}✔ Official build detected – generating OTA JSON...${CL_RST}"; \
+			./vendor/voltage/build/tools/createjson.sh $(TARGET_DEVICE) $(PRODUCT_OUT) voltage-$(VOLTAGE_VERSION).zip; \
+		else \
+			echo -e "${CL_BLD}${CL_RED}⚠ Unofficial build – skipping OTA JSON creation.${CL_RST}"; \
+		fi; \
+		echo -e "\n${CL_BLD}${CL_GRN}[===============================================================]${CL_RST}\n"; \
+	}
