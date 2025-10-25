@@ -1,4 +1,4 @@
-# Copyright (C) 2021 VoltageOS
+# Copyright (C) 2025 VoltageOS
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@ ANDROID_VERSION := 16
 VOLTAGEVERSION := 5.2
 
 VOLTAGE_BUILD_TYPE ?= UNOFFICIAL
+VOLTAGE_GPG_KEY :=
+VOLTAGE_GPG_UID :=
 VOLTAGE_DATE_YEAR := $(shell date -u +%Y)
 VOLTAGE_DATE_MONTH := $(shell date -u +%m)
 VOLTAGE_DATE_DAY := $(shell date -u +%d)
@@ -26,15 +28,63 @@ TARGET_PRODUCT_SHORT := $(subst voltage_,,$(VOLTAGE_BUILD))
 
 ifeq ($(VOLTAGE_BUILD_TYPE), OFFICIAL)
 
-  OFFICIAL_DEVICES_LIST := $(shell /usr/bin/curl -sLk --connect-timeout 5 https://raw.githubusercontent.com/VoltageOS/vendor_voltage/16/voltage.devices)
+  DEVICES_TEMP_FILE := $(shell mktemp)
 
-  ifeq ($(strip $(OFFICIAL_DEVICES_LIST)),)
+  $(shell /usr/bin/curl -sLk --connect-timeout 10 https://raw.githubusercontent.com/VoltageOS/vendor_voltage/16/voltage.devices -o $(DEVICES_TEMP_FILE))
+
+  ifeq ($(shell stat -c %s $(DEVICES_TEMP_FILE) 2>/dev/null), 0)
     $(error Failed to download the official devices list. Please check your network connection.)
   endif
 
-  ifeq ($(filter $(VOLTAGE_BUILD), $(OFFICIAL_DEVICES_LIST)),)
-    VOLTAGE_BUILD_TYPE := UNOFFICIAL
+  DEVICE_ENTRY := $(shell grep "^$(VOLTAGE_BUILD):" $(DEVICES_TEMP_FILE) 2>/dev/null)
+  
+  ifneq ($(strip $(DEVICE_ENTRY)),)
+    REQUIRED_GPG_KEY := $(shell echo $(DEVICE_ENTRY) | cut -d: -f2 | tr -d '[:space:]')
+    GPG_CACHE_FILE := $(OUT_DIR)/.voltage_gpg_keys.cache
+
+    LOCAL_GPG_KEYS := $(shell cat $(GPG_CACHE_FILE) 2>/dev/null | tr -d '[:space:]')
+
+    ifeq ($(strip $(LOCAL_GPG_KEYS)),)
+      DISCOVERED_KEYS := $(shell gpg2 --list-secret-keys --with-colons --fingerprint 2>/dev/null | grep "^fpr" | cut -d: -f10 | tr -d '[:space:]')
+      ifneq ($(strip $(DISCOVERED_KEYS)),)
+        LOCAL_GPG_KEYS := $(DISCOVERED_KEYS)
+        $(shell mkdir -p $(dir $(GPG_CACHE_FILE)) && echo '$(LOCAL_GPG_KEYS)' > $(GPG_CACHE_FILE))
+      endif
+    endif
+
+    ifeq ($(strip $(LOCAL_GPG_KEYS)),)
+      $(warning No GPG keys found in local keyring. Building as UNOFFICIAL.)
+      VOLTAGE_BUILD_TYPE := UNOFFICIAL
+    else
+      KEY_FOUND := $(findstring $(REQUIRED_GPG_KEY),$(LOCAL_GPG_KEYS))
+
+      ifeq ($(strip $(KEY_FOUND)),)
+        $(warning GPG key $(REQUIRED_GPG_KEY) not found in local keyring for device $(VOLTAGE_BUILD). Building as UNOFFICIAL.)
+        VOLTAGE_BUILD_TYPE := UNOFFICIAL
+      else
+        $(warning GPG authentication successful for device $(VOLTAGE_BUILD). Building as OFFICIAL.)
+        # Populate the GPG variables on success
+        VOLTAGE_GPG_KEY := $(REQUIRED_GPG_KEY)
+        VOLTAGE_GPG_UID := $(shell gpg2 --list-keys --with-colons $(REQUIRED_GPG_KEY) 2>/dev/null | grep '^uid' | head -n 1 | cut -d: -f10 | sed -e 's/\\x3c/</' -e 's/\\x3e/>/' -e 's/.*/"&"/')
+        ifeq ($(strip $(VOLTAGE_GPG_UID)),)
+            VOLTAGE_GPG_UID := "Could not parse User ID"
+        endif
+      endif
+    endif
+  else
+    DEVICE_IN_OLD_FORMAT := $(shell grep "^$(VOLTAGE_BUILD)$$" $(DEVICES_TEMP_FILE) 2>/dev/null)
+
+    ifneq ($(strip $(DEVICE_IN_OLD_FORMAT)),)
+      $(warning Device $(VOLTAGE_BUILD) is in the list but has no GPG key configured. Building as UNOFFICIAL.)
+      $(warning Maintainer must provide GPG key in format: $(VOLTAGE_BUILD):GPG_FINGERPRINT)
+      VOLTAGE_BUILD_TYPE := UNOFFICIAL
+    else
+      $(warning Device $(VOLTAGE_BUILD) is not in the official devices list. Building as UNOFFICIAL.)
+      VOLTAGE_BUILD_TYPE := UNOFFICIAL
+    endif
   endif
+
+  $(shell rm -f $(DEVICES_TEMP_FILE))
 
 endif
 
@@ -55,4 +105,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
   ro.voltage.fingerprint=$(VOLTAGE_FINGERPRINT) \
   ro.voltage.device=$(VOLTAGE_BUILD) \
   ro.voltage.platform_release_or_codename=$(VOLTAGE_PLATFORM_RELEASE_OR_CODENAME) \
-  org.voltage.version=$(VOLTAGEVERSION)
+  org.voltage.version=$(VOLTAGEVERSION) \
+  ro.voltage.maintainer.gpg_key=$(VOLTAGE_GPG_KEY) \
+  ro.voltage.maintainer.gpg_uid=$(VOLTAGE_GPG_UID)
