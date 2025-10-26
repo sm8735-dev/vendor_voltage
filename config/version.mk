@@ -63,9 +63,8 @@ ifeq ($(VOLTAGE_BUILD_TYPE), OFFICIAL)
         VOLTAGE_BUILD_TYPE := UNOFFICIAL
       else
         $(warning GPG authentication successful for device $(VOLTAGE_BUILD). Building as OFFICIAL.)
-        # Populate the GPG variables on success
         VOLTAGE_GPG_KEY := $(REQUIRED_GPG_KEY)
-        VOLTAGE_GPG_UID := $(shell gpg2 --list-keys --with-colons $(REQUIRED_GPG_KEY) 2>/dev/null | grep '^uid' | head -n 1 | cut -d: -f10 | sed -e 's/\\x3c/</' -e 's/\\x3e/>/' -e 's/.*/"&"/')
+        VOLTAGE_GPG_UID := $(shell gpg2 --list-keys --with-colons '$(REQUIRED_GPG_KEY)' 2>/dev/null | awk -F: '/^uid/ {print $$10; exit}' | xxd -p | tr -d '\n')
         ifeq ($(strip $(VOLTAGE_GPG_UID)),)
             VOLTAGE_GPG_UID := "Could not parse User ID"
         endif
@@ -107,4 +106,4 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
   ro.voltage.platform_release_or_codename=$(VOLTAGE_PLATFORM_RELEASE_OR_CODENAME) \
   org.voltage.version=$(VOLTAGEVERSION) \
   ro.voltage.maintainer.gpg_key=$(VOLTAGE_GPG_KEY) \
-  ro.voltage.maintainer.gpg_uid=$(VOLTAGE_GPG_UID)
+  ro.voltage.maintainer.gpg_uid="$(VOLTAGE_GPG_UID)"
