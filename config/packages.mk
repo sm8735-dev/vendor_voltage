@@ -22,7 +22,6 @@ PRODUCT_PACKAGES += \
     talkback \
     LMOFreeform \
     LMOFreeformSidebar \
-    NetworkLocation \
     AppCompatConfig \
     CertifiedKeyboxOverlay
 
