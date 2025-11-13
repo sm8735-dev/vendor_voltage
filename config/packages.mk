@@ -22,8 +22,7 @@ PRODUCT_PACKAGES += \
     talkback \
     LMOFreeform \
     LMOFreeformSidebar \
-    AppCompatConfig \
-    CertifiedKeyboxOverlay
+    AppCompatConfig
 
 ifeq ($(VOLTAGE_BUILD_TYPE),OFFICIAL)
     PRODUCT_PACKAGES += \
