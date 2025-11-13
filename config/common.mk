@@ -182,7 +182,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
     persist.sys.pihooks_SDK_INT?=32
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BuildFingerprint=google/cheetah_beta/cheetah:16/BP41.250916.012.A1/14330953:user/release-keys \
     PihooksGmsFp="google/cheetah_beta/cheetah:16/BP41.250916.012.A1/14330953:user/release-keys" \
     PihooksGmsModel="Pixel 7 Pro"
 
