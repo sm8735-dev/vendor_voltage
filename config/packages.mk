@@ -1,33 +1,12 @@
 # VoltageOS packages
 PRODUCT_PACKAGES += \
     SimpleDeviceConfig \
-    Covers \
-    Etar \
     ThemePicker \
     AvatarPicker \
     ThemesStub \
-    GmsCompat \
-    GameSpace \
-    Apps \
-    VoltageSetupWizard \
     Jellyfish \
-    LogViewer \
-    OmniJaws \
-    ParallelSpace \
     Gramophone \
-    Seedvault \
-    Datura \
-    ExactCalculator \
-    Glimpse \
-    talkback \
-    LMOFreeform \
-    LMOFreeformSidebar \
-    AppCompatConfig
-
-ifeq ($(VOLTAGE_BUILD_TYPE),OFFICIAL)
-    PRODUCT_PACKAGES += \
-        Updater
-endif
+    ExactCalculator
 
 ifeq ($(VOLTAGE_BUILD_TYPE),OFFICIAL)
 include vendor/voltage-priv/keys/keys.mk
