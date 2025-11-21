@@ -1,7 +1,0 @@
-aconfig_values {
-    name: "aconfig-values-bp3a-android.app.flags-all",
-    package: "android.app.flags",
-    srcs: [
-        "*.textproto",
-    ],
-}
