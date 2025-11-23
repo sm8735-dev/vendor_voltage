@@ -3,10 +3,15 @@ PRODUCT_PACKAGES += \
     SimpleDeviceConfig \
     ThemePicker \
     AvatarPicker \
+    Etar \
+    LogViewer \
+    Seedvault \
+    Glimpse \
     ThemesStub \
     Jellyfish \
     Gramophone \
-    ExactCalculator
+    ExactCalculator \
+    AppCompatConfig
 
 ifeq ($(VOLTAGE_BUILD_TYPE),OFFICIAL)
 include vendor/voltage-priv/keys/keys.mk
