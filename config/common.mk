@@ -15,13 +15,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.setupwizard.enterprise_mode=1 \
     ro.storage_manager.enabled=true \
     ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
-    ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
-
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    is_expressive_design_enabled=true
-
-# Allow vendor prebuilt repos to exclude themselves from bp scanning
--include $(sort $(wildcard vendor/*/*/exclude-bp.mk))
+    ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html
 
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
@@ -31,6 +25,9 @@ else
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.com.google.clientidbase=$(PRODUCT_GMS_CLIENTID_BASE)
 endif
+
+# Allow vendor prebuilt repos to exclude themselves from bp scanning
+-include $(sort $(wildcard vendor/*/*/exclude-bp.mk))
 
 # AOSP recovery flashing
 ifeq ($(TARGET_USES_AOSP_RECOVERY),true)
@@ -213,15 +210,11 @@ endif
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.systemuicompilerfilter=speed
 
+# Non-RRO overlays
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/voltage/overlay/no-rro
 PRODUCT_PACKAGE_OVERLAYS += \
     vendor/voltage/overlay/common \
     vendor/voltage/overlay/no-rro
-
-PRODUCT_PACKAGES += \
-    NetworkStackOverlay \
-    DocumentsUIOverlay \
-    PermissionControllerOverlay \
 
 # Filesystems tools
 PRODUCT_PACKAGES += \
@@ -247,13 +240,11 @@ PRODUCT_PACKAGES += \
     AndroidSnowPaintDropTheme \
     AndroidEspressoTheme
 
-# RRO
-include vendor/voltage/config/rro_overlays.mk
-
-ifeq ($(TARGET_BUILD_VARIANT),userdebug)
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    debug.sf.enable_transaction_tracing=false
-endif
+# RRO overlays
+PRODUCT_PACKAGES += \
+    DocumentsUIOverlay \
+    NetworkStackOverlay \
+    PermissionControllerOverlay
 
 # SetupWizard
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -267,6 +258,13 @@ PRODUCT_COPY_FILES += \
 # Versioning
 include vendor/voltage/config/version.mk
 
+# Private keys
+ifeq ($(VOLTAGE_BUILD_TYPE),OFFICIAL)
+include vendor/voltage-priv/keys/keys.mk
+else
+-include vendor/voltage-priv/keys/keys.mk
+endif
+
 # Bootanimation
 PRODUCT_PACKAGES += \
     bootanimation.zip \
@@ -276,8 +274,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     framework_compatibility_matrix.lineage.xml
 
-# boost framework
-include vendor/voltage/config/boost.mk
+# Torch strength
+TORCH_STR_SUPPORTED ?= false
+
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.sys.torch_str_support=$(TORCH_STR_SUPPORTED)
 
 # Fonts
 $(call inherit-product, vendor/voltage/fonts/fonts.mk)
@@ -292,7 +293,7 @@ $(call inherit-product, vendor/voltage/audio/audio.mk)
 $(call inherit-product, vendor/voltage/themes/icon_packs/icon_packs.mk)
 
 # Game Props
-TARGET_PRODUCT_PROP += vendor/voltage/config//gameprops/product.prop
+TARGET_PRODUCT_PROP += vendor/voltage/config/gameprops/product.prop
 
 # Include extra packages
 include vendor/voltage/config/packages.mk
