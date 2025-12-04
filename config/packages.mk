@@ -3,15 +3,7 @@ PRODUCT_PACKAGES += \
     SimpleDeviceConfig \
     ThemePicker \
     AvatarPicker \
-    Etar \
-    LogViewer \
-    Seedvault \
-    Glimpse \
-    ThemesStub \
-    Jellyfish \
-    Gramophone \
-    ExactCalculator \
-    AppCompatConfig
+    ThemesStub
 
 ifneq ($(PRODUCT_NO_CAMERA),true)
 PRODUCT_PACKAGES += \
