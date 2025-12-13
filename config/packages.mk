@@ -1,9 +1,21 @@
 # VoltageOS packages
 PRODUCT_PACKAGES += \
     SimpleDeviceConfig \
+    Covers \
+    Etar \
     ThemePicker \
     AvatarPicker \
-    ThemesStub
+    ThemesStub \
+    Jellyfish \
+    LogViewer \
+    Gramophone \
+    GameSpace \
+    Seedvault \
+    Datura \
+    ExactCalculator \
+    Glimpse \
+    talkback \
+    AppCompatConfig
 
 ifneq ($(PRODUCT_NO_CAMERA),true)
 PRODUCT_PACKAGES += \
