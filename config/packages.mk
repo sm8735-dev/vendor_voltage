@@ -15,6 +15,8 @@ PRODUCT_PACKAGES += \
     ExactCalculator \
     Glimpse \
     talkback \
+    LMOFreeform \
+    LMOFreeformSidebar \
     AppCompatConfig
 
 ifneq ($(PRODUCT_NO_CAMERA),true)
