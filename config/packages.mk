@@ -18,6 +18,7 @@ PRODUCT_PACKAGES += \
     talkback \
     LMOFreeform \
     LMOFreeformSidebar \
+    OmniJaws \
     AppCompatConfig
 
 ifneq ($(PRODUCT_NO_CAMERA),true)
