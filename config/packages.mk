@@ -21,6 +21,11 @@ PRODUCT_PACKAGES += \
     OmniJaws \
     AppCompatConfig
 
+ifeq ($(VOLTAGE_BUILD_TYPE),OFFICIAL)
+    PRODUCT_PACKAGES += \
+        Updater
+endif
+
 ifneq ($(PRODUCT_NO_CAMERA),true)
 PRODUCT_PACKAGES += \
     Aperture
