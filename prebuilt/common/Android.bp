@@ -34,3 +34,11 @@ android_app_import {
         "androidx.window.sidecar",
     ],
 }
+
+android_app_import {
+    name: "VoltageJump",
+    apk: "VoltageJump/VoltageJump.apk",
+    presigned: true,
+    preprocessed: true,
+    product_specific: true,
+}
