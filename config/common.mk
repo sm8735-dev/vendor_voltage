@@ -168,19 +168,19 @@ FULL_SYSTEM_OPTIMIZE_JAVA ?= true
 
 # PIF values
 PRODUCT_PRODUCT_PROPERTIES += \
-    persist.sys.pihooks_MANUFACTURER?=Google \
-    persist.sys.pihooks_BRAND?=google \
-    persist.sys.pihooks_PRODUCT?=blazer_beta \
-    persist.sys.pihooks_DEVICE?=blazer \
-    persist.sys.pihooks_ID?=CP21.260206.011 \
-    persist.sys.pihooks_RELEASE?=16 \
-    persist.sys.pihooks_SECURITY_PATCH?=2026-02-05 \
-    persist.sys.pihooks_DEVICE_INITIAL_SDK_INT?=21 \
-    persist.sys.pihooks_SDK_INT?=32
+    persist.sys.binfo.MANUFACTURER?=Google \
+    persist.sys.binfo.BRAND?=google \
+    persist.sys.binfo.PRODUCT?=blazer_beta \
+    persist.sys.binfo.DEVICE?=blazer \
+    persist.sys.binfo.ID?=CP21.260206.011 \
+    persist.sys.binfo.RELEASE?=16 \
+    persist.sys.binfo.SECURITY_PATCH?=2026-02-05 \
+    persist.sys.binfo.DEVICE_INITIAL_SDK_INT?=21 \
+    persist.sys.binfo.SDK_INT?=32
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PihooksGmsFp="google/blazer_beta/blazer:CinnamonBun/CP21.260206.011/14911669:user/release-keys" \
-    PihooksGmsModel="Pixel 10 Pro"
+    BinfoGmsFp="google/blazer_beta/blazer:CinnamonBun/CP21.260206.011/14911669:user/release-keys" \
+    BinfoGmsModel="Pixel 10 Pro"
 
 # Storage manager
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
