@@ -166,22 +166,6 @@ SYSTEM_OPTIMIZE_JAVA ?= true
 SYSTEMUI_OPTIMIZE_JAVA ?= true
 FULL_SYSTEM_OPTIMIZE_JAVA ?= true
 
-# PIF values
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.sys.binfo.MANUFACTURER?=Google \
-    persist.sys.binfo.BRAND?=google \
-    persist.sys.binfo.PRODUCT?=blazer_beta \
-    persist.sys.binfo.DEVICE?=blazer \
-    persist.sys.binfo.ID?=CP21.260306.017 \
-    persist.sys.binfo.RELEASE?=17 \
-    persist.sys.binfo.SECURITY_PATCH?=2026-03-05 \
-    persist.sys.binfo.DEVICE_INITIAL_SDK_INT?=21 \
-    persist.sys.binfo.SDK_INT?=32
-
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    BinfoGmsFp="google/blazer_beta/blazer:17/CP21.260306.017/15063635:user/release-keys" \
-    BinfoGmsModel="Pixel 10 Pro"
-
 # Storage manager
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.storage_manager.enabled=true
