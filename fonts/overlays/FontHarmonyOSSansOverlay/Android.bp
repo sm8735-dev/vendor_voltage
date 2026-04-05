@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2021 The Proton AOSP Project
+// Copyright (C) 2026 VoltageOS
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 //
 
 runtime_resource_overlay {
-    name: "FontSourceSerifOverlay",
-    theme: "FontSourceSerif",
+    name: "FontHarmonyOSSansOverlay",
     product_specific: true,
+    theme: "FontHarmonyOSSans",
 }

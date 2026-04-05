@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    Copyright (C) 2021 The Proton AOSP Project
+    Copyright (C) 2026 VoltageOS
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -15,8 +15,9 @@
     limitations under the License.
 -->
 <resources>
-    <string name="config_bodyFontFamily" translatable="false">noto-sans</string>
-    <string name="config_bodyFontFamilyMedium" translatable="false">noto-sans-medium</string>
-    <string name="config_headlineFontFamily" translatable="false">noto-sans</string>
-    <string name="config_headlineFontFamilyMedium" translatable="false">noto-sans-medium</string>
+    <string name="config_bodyFontFamily" translatable="false">harmonyos-sans</string>
+    <string name="config_bodyFontFamilyMedium" translatable="false">harmonyos-sans-medium</string>
+    <string name="config_headlineFontFamily" translatable="false">harmonyos-sans</string>
+    <string name="config_headlineFontFamilyMedium" translatable="false">harmonyos-sans-medium</string>
+    <string name="config_clockFontFamily" translatable="false">harmonyos-sans-clock</string>
 </resources>

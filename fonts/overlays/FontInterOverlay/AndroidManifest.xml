@@ -1,5 +1,5 @@
 <!--
-    Copyright (C) 2021 The Proton AOSP Project
+    Copyright (C) 2026 VoltageOS
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
     limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.voltage.theme.font.source_sans">
+    package="org.voltage.theme.font.inter">
 
     <overlay android:targetPackage="android"
         android:category="android.theme.customization.font"
         android:priority="1" />
 
     <application
-        android:label="Source Sans"
+        android:label="Inter"
         android:hasCode="false" />
 
 </manifest>

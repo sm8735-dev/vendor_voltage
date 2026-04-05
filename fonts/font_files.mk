@@ -20,6 +20,10 @@ LOCAL_PATH := vendor/voltage/fonts
 
 PRODUCT_PACKAGES += \
     Dosis-VF.ttf \
+    HarmonyOS-Sans.ttf \
+    HarmonyOS-Sans-Italic.ttf \
+    Inter-Italic.ttf \
+    Inter-Variable.ttf \
     Linotte.ttf \
     Fucek.ttf \
     Manrope-VF.ttf \
@@ -28,6 +32,7 @@ PRODUCT_PACKAGES += \
     GoogleSans-Regular.ttf \
     GoogleSans-Italic.ttf \
     GoogleSansFlex-Regular.ttf \
+    GoogleSansFlexClock-Regular.ttf \
     Rookery-Regular.otf \
     Rookery-Bold.otf \
     Rookery-Italic.otf \

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2021 The Proton AOSP Project
+ * Copyright (C) 2026 VoltageOS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +15,13 @@
  */
 
 prebuilt_font {
-    name: "GoogleSans-Regular.ttf",
-    src: "GoogleSans-Regular.ttf",
+    name: "Inter-Italic.ttf",
+    src: "Inter-Italic.ttf",
     product_specific: true,
 }
 
 prebuilt_font {
-    name: "GoogleSans-Italic.ttf",
-    src: "GoogleSans-Italic.ttf",
-    product_specific: true,
-}
-
-prebuilt_font {
-    name: "GoogleSansFlex-Regular.ttf",
-    src: "GoogleSansFlex-Regular.ttf",
-    product_specific: true,
-}
-
-prebuilt_font {
-    name: "GoogleSansFlexClock-Regular.ttf",
-    src: "GoogleSansFlexClock-Regular.ttf",
+    name: "Inter-Variable.ttf",
+    src: "Inter-Variable.ttf",
     product_specific: true,
 }

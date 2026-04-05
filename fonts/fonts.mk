@@ -24,13 +24,13 @@ PRODUCT_PACKAGES += \
 
 # Overlays for UI font styles
 PRODUCT_PACKAGES += \
-    FontHKGroteskOverlay \
     FontDosisOverlay \
     FontFluidSansOverlay \
     FontManropeOverlay \
+    FontHarmonyOSSansOverlay \
+    FontInterOverlay \
     FontRecursiveCasualOverlay \
     FontRecursiveLinearOverlay \
-    FontHarmonyOSSansOverlay \
     FontOppoSansOverlay \
     FontLinotteOverlay \
     FontFucekOverlay \

@@ -11,6 +11,6 @@
         android:label="@string/font_google_sans_flex_overlay">
         <meta-data
             android:name="android.theme.customization.REQUIRED_SYSTEM_FONTS"
-            android:value="google-sans-flex,google-sans-flex-medium" />
+            android:value="google-sans-flex,google-sans-flex-medium,google-sans-flex-clock" />
     </application>
 </manifest>
