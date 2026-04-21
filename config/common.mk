@@ -88,6 +88,8 @@ endif
 
 PRODUCT_COPY_FILES += \
     vendor/voltage/prebuilt/common/etc/sysconfig/pixel_features.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_features.xml \
+    vendor/voltage/prebuilt/common/etc/sysconfig/contextual_search.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/contextual_search.xml \
+    vendor/voltage/prebuilt/common/etc/sysconfig/nga.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/nga.xml \
 
 # Copy all VOLTAGE-specific init rc files
 $(foreach f,$(wildcard vendor/voltage/prebuilt/common/etc/init/*.rc),\
