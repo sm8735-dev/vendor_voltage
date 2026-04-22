@@ -1,6 +1,3 @@
-# Allow vendor/extra to override any property by setting it first
-$(call inherit-product-if-exists, vendor/extra/product.mk)
-
 PRODUCT_BRAND ?= VoltageOS
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
@@ -28,12 +25,6 @@ endif
 
 # Allow vendor prebuilt repos to exclude themselves from bp scanning
 -include $(sort $(wildcard vendor/*/*/exclude-bp.mk))
-
-# AOSP recovery flashing
-ifeq ($(TARGET_USES_AOSP_RECOVERY),true)
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    persist.sys.recovery_update=true
-endif
 
 ifeq ($(TARGET_BUILD_VARIANT),eng)
 # Disable ADB authentication
@@ -86,10 +77,11 @@ PRODUCT_SYSTEM_PROPERTIES += \
     ro.surface_flinger.supports_background_blur=0
 endif
 
+# Pixel features and C2S
 PRODUCT_COPY_FILES += \
     vendor/voltage/prebuilt/common/etc/sysconfig/pixel_features.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_features.xml \
     vendor/voltage/prebuilt/common/etc/sysconfig/contextual_search.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/contextual_search.xml \
-    vendor/voltage/prebuilt/common/etc/sysconfig/nga.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/nga.xml \
+    vendor/voltage/prebuilt/common/etc/sysconfig/nga.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/nga.xml
 
 # Copy all VOLTAGE-specific init rc files
 $(foreach f,$(wildcard vendor/voltage/prebuilt/common/etc/init/*.rc),\
@@ -119,14 +111,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     voltage-component-overrides.xml
 
-# DesktopMode
-PRODUCT_PACKAGES += \
-    DesktopMode
-
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.freeform_window_management.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.software.freeform_window_management.xml
-
-$(call inherit-product-if-exists, packages/services/VncFlinger/product.mk)
 
 # Face Unlock
 TARGET_FACE_UNLOCK_SUPPORTED ?= $(TARGET_SUPPORTS_64_BIT_APPS)
@@ -220,10 +206,7 @@ PRODUCT_COPY_FILES += \
 
 # Themes
 PRODUCT_PACKAGES += \
-    AndroidBlackThemeOverlay \
-    AndroidVividTheme \
-    AndroidSnowPaintDropTheme \
-    AndroidEspressoTheme
+    AndroidBlackThemeOverlay
 
 # RRO overlays
 PRODUCT_PACKAGES += \
@@ -259,12 +242,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     framework_compatibility_matrix.lineage.xml
 
-# Torch strength
-TORCH_STR_SUPPORTED ?= false
-
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.sys.torch_str_support=$(TORCH_STR_SUPPORTED)
-
 # Fonts
 $(call inherit-product, vendor/voltage/fonts/fonts.mk)
 
@@ -278,9 +255,6 @@ $(call inherit-product, vendor/voltage/audio/audio.mk)
 PRODUCT_PACKAGES += \
     custom_charger_animation \
     custom_charger_animation_vendor
-
-# Game Props
-TARGET_PRODUCT_PROP += vendor/voltage/config/gameprops/product.prop
 
 # Include extra packages
 include vendor/voltage/config/packages.mk
