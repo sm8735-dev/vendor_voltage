@@ -47,6 +47,9 @@ endif
 PRODUCT_PRODUCT_PROPERTIES += \
     debug.graphics.game_default_frame_rate.disabled=true
 
+# Enable Material Design 3 Expressive
+PRODUCT_PRODUCT_PROPERTIES += is_expressive_design_enabled=true
+
 # Backup Tool
 PRODUCT_COPY_FILES += \
     vendor/voltage/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
