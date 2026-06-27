@@ -47,3 +47,21 @@ bacon: $(DEFAULT_GOAL) $(INTERNAL_OTA_PACKAGE_TARGET)
 		fi; \
 		echo -e "\n${CL_BLD}${CL_GRN}[===============================================================]${CL_RST}\n"; \
 	}
+
+VOLTAGE_FASTBOOT_PACKAGE := $(PRODUCT_OUT)/voltage-$(VOLTAGE_VERSION)-img.zip
+
+.PHONY: fastbootpkg
+fastbootpkg: $(INTERNAL_UPDATE_PACKAGE_TARGET)
+	$(hide) ln -f $(INTERNAL_UPDATE_PACKAGE_TARGET) $(VOLTAGE_FASTBOOT_PACKAGE)
+	$(hide) $(SHA256) $(VOLTAGE_FASTBOOT_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(VOLTAGE_FASTBOOT_PACKAGE).sha256sum
+
+	$(hide) { \
+		echo -e "\n${CL_BLD}${CL_GRN}[============= ${CL_YLW}⚡ VoltageOS Fastboot Package Complete ⚡${CL_GRN} =============]${CL_RST}\n"; \
+		echo -e "${CL_BLD}${CL_GRN}▶ Device      :${CL_CYN} $(TARGET_DEVICE)${CL_RST}"; \
+		echo -e "${CL_BLD}${CL_GRN}▶ Build Type  :${CL_CYN} $(TARGET_BUILD_VARIANT)${CL_RST}"; \
+		echo -e "${CL_BLD}${CL_GRN}▶ Output File :${CL_CYN} $(VOLTAGE_FASTBOOT_PACKAGE)${CL_RST}"; \
+		echo -e "${CL_BLD}${CL_GRN}▶ SHA256      :${CL_CYN} `cut -d' ' -f1 $(VOLTAGE_FASTBOOT_PACKAGE).sha256sum`${CL_RST}"; \
+		echo -e "${CL_BLD}${CL_GRN}▶ File Size   :${CL_CYN} `du -sh $(VOLTAGE_FASTBOOT_PACKAGE) | awk '{print $$1}'`${CL_RST}"; \
+		echo -e "${CL_BLD}${CL_GRN}▶ Build Date  :${CL_CYN} `grep ro.voltage.build.date $(PRODUCT_OUT)/system/build.prop | cut -d'=' -f2-`${CL_RST}"; \
+		echo -e "\n${CL_BLD}${CL_GRN}[===============================================================]${CL_RST}\n"; \
+	}

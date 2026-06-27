@@ -16,6 +16,18 @@ function brunch()
     return $?
 }
 
+function dist()
+{
+    breakfast $*
+    if [ $? -eq 0 ]; then
+        mka fastbootpkg
+    else
+        echo "No such item in dist menu. Try 'breakfast'"
+        return 1
+    fi
+    return $?
+}
+
 function breakfast()
 {
     target=$1
