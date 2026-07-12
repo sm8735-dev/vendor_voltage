@@ -253,7 +253,7 @@ PRODUCT_PACKAGES += \
 $(call inherit-product, vendor/voltage/fonts/fonts.mk)
 
 # Inherit SystemUI Clocks if they exist
-$(call inherit-product-if-exists, vendor/SystemUIClocks/product.mk)
+$(call inherit-product-if-exists, vendor/SystemUIClocks/vendor/vendor-vendor.mk)
 
 # Audio
 $(call inherit-product, vendor/voltage/audio/audio.mk)
