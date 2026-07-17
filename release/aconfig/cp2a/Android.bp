@@ -16,12 +16,14 @@
 aconfig_value_set {
     name: "aconfig_value_set-voltage-cp2a",
     values: [
+        "aconfig-values-cp2a-android.appwidget-all",
+        "aconfig-values-cp2a-android.content.pm-all",
         "aconfig-values-cp2a-android.hardware.biometrics-all",
-        "aconfig-values-cp2a-android.view.accessibility-all",
+        "aconfig-values-cp2a-android.security-all",
         "aconfig-values-cp2a-com.android.launcher3-all",
-        "aconfig-values-cp2a-com.android.settings.flags-all",
         "aconfig-values-cp2a-com.android.systemui-all",
         "aconfig-values-cp2a-com.android.systemui.shared-all",
         "aconfig-values-cp2a-com.android.wm.shell-all",
+        "aconfig-values-cp2a-com.android.providers.media-all",
     ],
 }
