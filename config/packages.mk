@@ -15,12 +15,10 @@ PRODUCT_PACKAGES += \
     Datura \
     ExactCalculator \
     Glimpse \
-    talkback \
     LMOFreeform \
     LMOFreeformSidebar \
     OmniJaws \
     AppCompatConfig \
-    VoltageJump \
     AppDataBackup
 
 ifeq ($(VOLTAGE_BUILD_TYPE),OFFICIAL)
