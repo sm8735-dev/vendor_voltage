@@ -30,7 +30,7 @@ ifeq ($(VOLTAGE_BUILD_TYPE), OFFICIAL)
 
   DEVICES_TEMP_FILE := $(shell mktemp)
 
-  $(shell /usr/bin/curl -sLk --connect-timeout 10 https://raw.githubusercontent.com/VoltageOS/vendor_voltage/16.2/voltage.devices -o $(DEVICES_TEMP_FILE))
+  $(shell /usr/bin/curl -sLk --connect-timeout 10 https://raw.githubusercontent.com/VoltageOS/vendor_voltage/17/voltage.devices -o $(DEVICES_TEMP_FILE))
 
   ifeq ($(shell stat -c %s $(DEVICES_TEMP_FILE) 2>/dev/null), 0)
     $(error Failed to download the official devices list. Please check your network connection.)
