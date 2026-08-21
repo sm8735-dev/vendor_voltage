@@ -4,7 +4,6 @@ PRODUCT_PACKAGES += \
     Covers \
     Etar \
     ThemePicker \
-    AvatarPicker \
     ThemesStub \
     Jellyfish \
     LogViewer \
